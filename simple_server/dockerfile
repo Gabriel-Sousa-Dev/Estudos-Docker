@@ -1,0 +1,10 @@
+#O dockerfile serve para criarmos uma imagem para nosso container
+
+#Seleciona qual imagem será utilizada
+FROM nginx
+
+#Copia tudo que estiver em html e joga na pasta host padrão do nginx
+COPY html /usr/share/nginx/html
+
+#Expõe a porta 80 do container
+EXPOSE 80
