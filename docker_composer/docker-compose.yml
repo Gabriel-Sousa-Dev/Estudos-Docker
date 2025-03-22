@@ -3,12 +3,14 @@ services:
     image: mysql:9.2.0
     restart: always
     container_name: mysql_container
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: validador_de_certificados
+      MYSQL_DATABASE: validador_de_certificado
 
   apache:
-    image: php:8.3.19-apache
+    build: ./php/
     restart: always
     container_name: apache_container
     depends_on:
@@ -16,7 +18,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./src/:/var/www/html/
+      - ./php/src/:/var/www/html/
 
   phpmyadmin:
     image: phpmyadmin:5.2.2
