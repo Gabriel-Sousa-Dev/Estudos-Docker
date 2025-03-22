@@ -1,7 +1,7 @@
 <?php
 
 define('DBNAME', 'validador_de_certificado');
-define('ROOT', 'mysql');
+define('ROOT', 'estudos-docker.railway.internal');
 define('USER', 'root');
 define('PASSWORD', 'example');
 
