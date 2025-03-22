@@ -8,6 +8,7 @@ if (!file_exists('./conexao.php')) {
         ";
 } else {
     include("./conexao.php");
+    include_once("./utils/gerarChave.php");
 }
 ?>
 <!DOCTYPE html>
@@ -74,27 +75,41 @@ if (!file_exists('./conexao.php')) {
             </div>
 
             <?php
-            if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['nome'])) {
-                $query = "INSERT INTO curso (nome) VALUES (:nome)";
+            if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['curso']) && isset($_POST['aluno'])) {                
+                // Gerando a chave do certificado
+                do {
+                    $chave = gerarChave();
+
+                    $stmtChave = $conexao->prepare("SELECT COUNT(*) FROM certificado_de_conclusao WHERE chave = :chave");
+                    $stmtChave->bindParam(':chave', $chave);
+
+                    $stmtChave->execute();
+
+                    $chave_existe = $stmtChave->fetchColumn();
+                    
+                } while($chave_existe > 0);
+
+                $query = "INSERT INTO certificado_de_conclusao (aluno_id, curso_id, chave) VALUES (:alunoID, :cursoID, :chave)";
 
                 $stmt = $conexao->prepare($query);
 
-                $stmt->bindParam(':nome', $_POST['nome']);
+                $stmt->bindParam(':alunoID', $_POST['aluno']);
+                $stmt->bindParam(':cursoID', $_POST['curso']);
+                $stmt->bindParam(':chave', $chave);
 
-                $stmt->execute();
-
-                if ($stmt->rowCount() === 1) {
+                if ($stmt->execute()) {
                     $certificacao = $stmt->fetch(PDO::FETCH_OBJ);
                     echo "
                         <div class='alert alert-dismissible alert-success' role='alert'>
-                            Curso criado com sucesso!
+                            Certificado criado com sucesso! <br>
+                            <strong>Chave:</strong> $chave
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>  
                         ";
                 } else {
                     echo "
                         <div class='alert alert-dismissible alert-danger' role='alert'>
-                            Ocorreu algum erro ao criar o novo curso!
+                            Ocorreu algum erro ao criar o novo certificado!
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>  
                         ";

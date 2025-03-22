@@ -32,14 +32,14 @@ if (!file_exists('./conexao.php')) {
         <form method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="cpf-input" class="form-label">CPF:</label>
-                <input type="text" required class="form-control" id="cpf-input" name="cpf" placeholder="000.000.000-00">
+                <input type="text" required class="form-control" id="cpf-input" name="cpf" placeholder="000.000.000-00" value="<?php echo isset($_GET['cpf']) ? htmlspecialchars($_GET['cpf']) : ''; ?>">
                 <div class="invalid-feedback">
                     Digite o CPF do concluinte
                 </div>
             </div>
             <div class="mb-3">
                 <label for="text-input" class="form-label">Chave:</label>
-                <input type="text" required class="form-control" id="text-input" name="chave">
+                <input type="text" required class="form-control" id="text-input" name="chave" value="<?php echo isset($_GET['chave']) ? htmlspecialchars($_GET['chave']) : ''; ?>">
                 <div class="invalid-feedback">
                     Digite a chave do certificado
                 </div>
