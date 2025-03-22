@@ -8,6 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: validador_de_certificado
+    networks:
+      - app_network
 
   apache:
     build: ./php/
@@ -19,6 +21,8 @@ services:
       - 8080:80
     volumes:
       - ./php/src/:/var/www/html/
+    networks:
+      - app_network
 
   phpmyadmin:
     image: phpmyadmin:5.2.2
@@ -30,3 +34,9 @@ services:
       - 8081:80
     environment:
       PMA_HOST: mysql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge 
