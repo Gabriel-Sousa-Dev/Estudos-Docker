@@ -1,0 +1,30 @@
+services:
+  mysql:
+    image: mysql:9.2.0
+    restart: always
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: validador_de_certificados
+
+  apache:
+    image: php:8.3.19-apache
+    restart: always
+    container_name: apache_container
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - ./src/:/var/www/html/
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.2
+    restart: always
+    container_name: phpmyadmin_container
+    depends_on:
+      - mysql
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
