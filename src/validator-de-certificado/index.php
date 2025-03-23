@@ -85,7 +85,7 @@ if (!file_exists('./conexao.php')) {
                                 <p class='m-0'>" . "FAEX" . "</p>
                             </div>
                             <div class='col-12 d-flex justify-content-center'>
-                                <button type='button' class='btn btn-success'>
+                                <button type='button' class='btn btn-success' id='download-certificado'>
                                     Download
                                 </button>
                             </div>
@@ -131,6 +131,13 @@ if (!file_exists('./conexao.php')) {
                 }, false)
             })
         })()
+    </script>
+    <script>
+        const downloadBtn = document.getElementById('download-certificado')
+
+        downloadBtn.addEventListener('click', () => {
+            alert('O certificado será baixado com um QR Code que redireciona para este site, trazendo os campos já preenchidos.')
+        })
     </script>
 </body>
 
