@@ -85,7 +85,7 @@ if (!file_exists('./conexao.php')) {
                                 <p class='m-0'>" . "FAEX" . "</p>
                             </div>
                             <div class='col-12 d-flex justify-content-center'>
-                                <button class='btn btn-success'>
+                                <button type='button' class='btn btn-success'>
                                     Download
                                 </button>
                             </div>
