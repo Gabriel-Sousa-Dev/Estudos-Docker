@@ -39,7 +39,7 @@ if (!file_exists('./conexao.php')) {
             </div>
             <div class="mb-3">
                 <label for="text-input" class="form-label">Chave:</label>
-                <input type="text" required class="form-control" id="text-input" name="chave" value="<?php echo isset($_GET['chave']) ? htmlspecialchars($_GET['chave']) : ''; ?>">
+                <input type="text" required class="form-control" id="text-input" name="chave" placeholder="AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAAA" value="<?php echo isset($_GET['chave']) ? htmlspecialchars($_GET['chave']) : ''; ?>">
                 <div class="invalid-feedback">
                     Digite a chave do certificado
                 </div>
