@@ -15,7 +15,9 @@
 
 <body>
     <main class="container mx-auto mb-3">
-        <h1 class="text-capitalize fw-bold mb-4 mt-1 text-center">Servidor PHP em Container</h1>
+        <h1 class="text-capitalize fw-bold mb-4 mt-1 text-center">
+            Servidor PHP em Container <?= getenv('life') ?? 'not found' ?>
+        </h1>
         <form class="w-75 mx-auto p-4 bg-secondary-subtle rounded border border-2 border-secondary needs-validation" novalidate>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email:</label>
